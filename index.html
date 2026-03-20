@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>진현도 ♥ 이혜인 모바일 청첩장</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #f7f1ed;
+      --paper: #fffdfa;
+      --soft: #fcf6f2;
+      --point: #b88b7a;
+      --point-dark: #8f685a;
+      --text: #564740;
+      --muted: #8d766b;
+      --line: #efe0d8;
+      --shadow: 0 12px 30px rgba(94, 68, 56, 0.08);
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #f8f2ee 0%, #f4ece7 100%);
+      color: var(--text);
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 0 24px rgba(0,0,0,0.05);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 74vh;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 24px 44px;
+      background:
+        linear-gradient(to top, rgba(71, 51, 43, 0.52), rgba(71, 51, 43, 0.10)),
+        url("KakaoTalk_20260221_221648860.jpg") center/cover no-repeat;
+      color: #fffdf8;
+    }
+
+    .hero-inner {
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      opacity: 0.92;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      margin: 0 4px;
+      color: #ffd6d6;
+    }
+
+    .hero-date {
+      margin-top: 14px;
+      font-size: 1rem;
+      opacity: 0.98;
+    }
+
+    .section {
+      padding: 44px 22px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 1.02rem;
+      letter-spacing: 0.16em;
+      color: var(--point);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .message-card, .info-card, .family-card, .video-card, .gallery-card {
+      background: var(--soft);
+      border-radius: 22px;
+      padding: 24px 18px;
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+
+    .message-card p {
+      margin: 0;
+      white-space: pre-line;
+      font-size: 1rem;
+    }
+
+    .couple-names {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--point-dark);
+      margin-bottom: 6px;
+    }
+
+    .couple-sub {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #f2e2da;
+      color: var(--point-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .info-card {
+      text-align: left;
+    }
+
+    .info-row {
+      display: flex;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      width: 64px;
+      flex-shrink: 0;
+      font-weight: 700;
+      color: var(--point);
+    }
+
+    .info-value {
+      flex: 1;
+      word-break: keep-all;
+    }
+
+    .family-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .family-item {
+      background: #fffdfa;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 16px;
+      text-align: left;
+    }
+
+    .family-role {
+      font-size: 0.9rem;
+      color: var(--point);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .family-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--point-dark);
+      margin-bottom: 6px;
+    }
+
+    .family-desc {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .video-link {
+      display: block;
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      background: #000;
+    }
+
+    .video-link img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      opacity: 0.92;
+    }
+
+    .play-badge {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to top, rgba(0,0,0,0.25), rgba(0,0,0,0.15));
+    }
+
+    .play-circle {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .play-triangle {
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid var(--point-dark);
+      margin-left: 4px;
+    }
+
+    .video-help {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1 / 1.15;
+      overflow: hidden;
+      border-radius: 16px;
+      cursor: pointer;
+      background: #eadad2;
+      border: 1px solid var(--line);
+      padding: 0;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .gallery-item:active img,
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-tip {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .btn-map {
+      display: inline-block;
+      margin-top: 18px;
+      background: var(--point);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .footer {
+      padding: 22px 22px 42px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(20, 14, 12, 0.88);
+      padding: 16px;
+      z-index: 999;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 82vh;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 420px) {
+      .hero {
+        min-height: 68vh;
+        padding-bottom: 36px;
+      }
+
+      .hero h1 {
+        font-size: 1.72rem;
+      }
+
+      .section {
+        padding: 38px 18px;
+      }
+
+      .info-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .info-label {
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">WEDDING INVITATION</div>
+        <h1>진현도 <span>♥</span> 이혜인</h1>
+        <div class="hero-date">2026년 5월 23일 토요일<br />서울 브라이튼하우스 강남</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">INVITATION</div>
+      <div class="message-card">
+        <p>서로에게 가장 친한 친구가 된지 10년, 둘이 있는 시간이 한없이 즐겁고 같은 것을 보며 웃는 사람과 평생을 약속합니다.
+찬란했던 20대의 시간들을 온전히 함께 기억하는 서로가 남은 앞으로의 모든 시간을 함께 할 수 있어 감사하고 행복합니다.
+
+저희의 새로운 시작을 축하해주세요!</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">COUPLE</div>
+      <div class="message-card">
+        <div class="couple-names">진현도 · 이혜인</div>
+        <div class="couple-sub">신랑 29세 · 신부 30세</div>
+        <div class="badge">연애 10년, 그리고 평생의 시작</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">FAMILY</div>
+      <div class="family-card">
+        <div class="family-grid">
+          <div class="family-item">
+            <div class="family-role">신랑</div>
+            <div class="family-name">진현도</div>
+            <div class="family-desc">진병규 · 이필화의 아들</div>
+          </div>
+          <div class="family-item">
+            <div class="family-role">신부</div>
+            <div class="family-name">이혜인</div>
+            <div class="family-desc">이대호 · 김선경의 딸</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">WEDDING INFO</div>
+      <div class="info-card">
+        <div class="info-row">
+          <div class="info-label">일시</div>
+          <div class="info-value">2026년 5월 23일 토요일</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">장소</div>
+          <div class="info-value">서울 브라이튼하우스 강남</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">주인공</div>
+          <div class="info-value">신랑 진현도 · 신부 이혜인</div>
+        </div>
+      </div>
+      <a class="btn-map" href="https://map.naver.com" target="_blank" rel="noopener noreferrer">예식장 위치 보기</a>
+    </section>
+
+    <section class="section">
+      <div class="section-title">VIDEO</div>
+      <div class="video-card">
+        <a class="video-link" href="https://www.youtube.com/watch?v=6gxjydPrXgM" target="_blank" rel="noopener noreferrer" aria-label="유튜브 영상 재생하기">
+          <img src="https://img.youtube.com/vi/6gxjydPrXgM/maxresdefault.jpg" alt="웨딩 영상 미리보기" />
+          <div class="play-badge">
+            <div class="play-circle">
+              <div class="play-triangle"></div>
+            </div>
+          </div>
+        </a>
+        <div class="video-help">미리보기를 누르면 유튜브에서 영상을 재생합니다.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">ALBUM</div>
+      <div class="gallery-card">
+        <div id="galleryGrid" class="gallery-grid"></div>
+        <div class="gallery-tip">사진을 누르면 크게 볼 수 있습니다.</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      소중한 분들을 정중히 초대합니다.<br />
+      진현도 ♥ 이혜인
+    </footer>
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button id="lightboxClose" class="lightbox-close" aria-label="닫기">×</button>
+    <img id="lightboxImage" src="" alt="확대 사진" />
+  </div>
+
+  <script>
+    const images = [
+      "KakaoTalk_20260221_221648860.jpg",
+      "KakaoTalk_20260221_221648860_01.jpg",
+      "KakaoTalk_20260221_221648860_02.jpg",
+      "KakaoTalk_20260221_221648860_03.jpg",
+      "KakaoTalk_20260221_221648860_04.jpg",
+      "KakaoTalk_20260221_221648860_05.jpg",
+      "KakaoTalk_20260221_221648860_06.jpg",
+      "KakaoTalk_20260221_221648860_07.jpg",
+      "KakaoTalk_20260221_221648860_08.jpg",
+      "KakaoTalk_20260221_221648860_09.jpg",
+      "KakaoTalk_20260221_221648860_10.jpg",
+      "KakaoTalk_20260221_221648860_11.jpg",
+      "KakaoTalk_20260221_221648860_12.jpg"
+    ];
+
+    const galleryGrid = document.getElementById("galleryGrid");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    images.forEach((src, index) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "gallery-item";
+      item.setAttribute("aria-label", `앨범 사진 ${index + 1} 크게 보기`);
+
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `웨딩 사진 ${index + 1}`;
+      img.loading = "lazy";
+
+      item.appendChild(img);
+      item.addEventListener("click", () => {
+        lightboxImage.src = src;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+
+      galleryGrid.appendChild(item);
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImage.src = "";
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.classList.contains("open")) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
